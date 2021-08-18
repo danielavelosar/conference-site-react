@@ -1,0 +1,9 @@
+.main__error{
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+}
+.img__error{
+
+    height: 80vh;
+}
