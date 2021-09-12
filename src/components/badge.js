@@ -5,9 +5,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Gravatar from '../components/Gravatar';
 class Badge extends React.Component {
     render(){
-        
-        const firstName = 'Daniela';
-        const lastName = 'Velosa';
 
         return<main className="Badge">
             <div className="Badge__header">

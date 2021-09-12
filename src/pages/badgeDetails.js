@@ -1,11 +1,56 @@
 import React from "react";
+import Logo from '../images/platziconf-logo.svg'
+import { Link } from "react-router-dom";
+import Badge from "../components/badge";
+import './styles/BadgeDetails.css';
+import DeleteBadgeModal from "../components/DeleteBadgeModal";
 
-class BadgeDetails extends React.Component{
-    render(){
-        return(
-            <h2>badge details</h2>
-        )
-    }
+
+function BadgeDetails(props){
+    const badge= props.badge;
+    return(
+        <div>
+            <div className="BadgeDetails__hero ">
+            <div className="container">
+                <div className="row">
+                    <div className="col-6">
+                        <img src={Logo} alt="Logo de la conferencia" />
+                    </div>
+                    <div className="col-6 BadgeDetails__hero-attendant-name">
+                        <h1>{badge.firstName} {badge.lastName}</h1>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+            
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <Badge 
+                        firstName = {badge.firstName}
+                        lastName = {badge.lastName}
+                        email={badge.email}
+                        twitter={badge.twitter}
+                        jobTitle={badge.jobTitle}
+                        /> 
+                    </div>
+                    <div className="col">
+                        <Link className="btn btn-primary mb-4" to={`/badges/${badge.id}/edit`}>
+                            Edit badge
+                        </Link>
+                        <button onClick={props.onOpenModal} className="btn btn-danger" >
+                            Delete badge
+                        </button>
+                        <DeleteBadgeModal isOpen={props.modalIsOpen} 
+                                        onClose={props.onCloseModal}
+                                        onDeleteBadge={props.onDeleteBadge}/> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>)
 }
 
-export default BadgeDetails
+
+export default BadgeDetails;
