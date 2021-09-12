@@ -47,3 +47,8 @@
   font-weight: bold;
   font-style: italic;
 }
+
+.Badges__lists{
+  display: flex;
+  justify-content: center;
+}

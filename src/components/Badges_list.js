@@ -1,37 +1,60 @@
-import React from 'react'
-import './styles/BadgeList.css'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
+import './styles/BadgeList.css';
 
-class BadgesList extends React.Component{
-    render(){
-        return(
-            <ul className="list-unstyled">
-                        {this.props.badges.map((badge) => {
-                                return(
-                                    <li key={badge.id} className= "BadgeList">
-                                        <div className="Badge">
-                                            <div >
-                                                <img className="Badge__avatar"
-                                                    src={badge.avatarUrl} 
-                                                    alt="" />
-                                            </div>
-                                            <div className = "Badge__section">
-                                                <strong>{badge.firstName} {badge.lastName}</strong>
-                                                <div className = "Badge__section-twitter">
-                                                    <img className = "Badge__icon" src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png"  alt="" />
-                                                    <a href= "https://twitter.com/${badge.twitter}">@{badge.twitter}</a>
-                                                </div>
-                                                <p>{badge.jobTitle}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                )
-                            })}
-            </ul>
-                        
-        );
-    }
+class BadgesListItem extends React.Component {
+  render() {
+    return (
+      <div className="BadgesListItem">
+        <img
+          className="BadgesListItem__avatar"
+          src={this.props.badge.avatarUrl}
+          alt={`${this.props.badge.firstName} ${this.props.badge.lastName}`}
+        />
+
+        <div>
+          <strong>
+            {this.props.badge.firstName} {this.props.badge.lastName}
+          </strong>
+          <br />@{this.props.badge.twitter}
+          <br />
+          {this.props.badge.jobTitle}
+        </div>
+      </div>
+    );
+  }
 }
 
+class BadgesList extends React.Component {
+  render() {
+    if (this.props.badges.length === 0) {
+      return (
+        <div>
+          <h3>There is no Badges</h3>
+          <Link className="btn btn-primary" to="/badges/new">
+            Create new badge
+          </Link>
+        </div>
+      );
+    }
 
-export default BadgesList
+    return (
+      <div className="BadgesList">
+        <ul className="list-unstyled">
+          {this.props.badges.map(badge => {
+            return (
+              <li key={badge.id}>
+                <BadgesListItem badge={badge} />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default BadgesList;
+
+
