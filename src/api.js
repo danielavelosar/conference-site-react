@@ -24,14 +24,15 @@ async function callApi(endpoint, options = {}) {
 const api = {
   badges: {
     list() {
-      throw new Error('not Found')
-      //return callApi('/badges');
+      //throw new Error('not Found')
+      return callApi('/badges');
     },
     create(badge) {
+      //throw new Error('not Found')
       return callApi(`/badges`, {
         method: 'POST',
         body: JSON.stringify(badge),
-      });
+      }); 
     },
     read(badgeId) {
       return callApi(`/badges/${badgeId}`);

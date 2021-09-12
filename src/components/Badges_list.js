@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Gravatar from '../components/Gravatar';
 import './styles/BadgeList.css';
 
 class BadgesListItem extends React.Component {
   render() {
     return (
       <div className="BadgesListItem">
-        <img
+        <Gravatar
           className="BadgesListItem__avatar"
-          src={this.props.badge.avatarUrl}
+          email={this.props.badge.email}
           alt={`${this.props.badge.firstName} ${this.props.badge.lastName}`}
-        />
-
+          />
         <div>
           <strong>
             {this.props.badge.firstName} {this.props.badge.lastName}
@@ -31,7 +30,7 @@ class BadgesList extends React.Component {
     if (this.props.badges.length === 0) {
       return (
         <div>
-          <h3>There is no Badges</h3>
+          <h3>There is no Badge</h3>
           <Link className="btn btn-primary" to="/badges/new">
             Create new badge
           </Link>
@@ -42,10 +41,15 @@ class BadgesList extends React.Component {
     return (
       <div className="BadgesList">
         <ul className="list-unstyled">
-          {this.props.badges.map(badge => {
+          {this.props.badges.slice(0).reverse().map(badge => {
             return (
               <li key={badge.id}>
-                <BadgesListItem badge={badge} />
+                <Link className = "text-reset text-decoration-none" to={`/badges/${badge.id}`}>
+                  <BadgesListItem badge={badge} />
+                </Link>
+                <Link className="btn btn-primary" to={`/badges/${badge.id}/edit`}>
+                  Edit badge
+                </Link>
               </li>
             );
           })}
